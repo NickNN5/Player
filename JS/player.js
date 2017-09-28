@@ -94,3 +94,13 @@ class Album{
     }
 
 }
+
+
+//ejecución principal.
+//creamos la lista de canciones:
+var albumT=album;
+//tenemos el album
+alert(albumT.name);
+alert(albumT.artist);
+//eliminar alertas y crear objeto player.
+
