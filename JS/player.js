@@ -27,7 +27,17 @@ class Player{
 
     isLastSong(){
         return (this.currentSong === this.albumgetLastSong());
-    }
+    };
+
+    getSongByTitle(title){
+        
+        for(var i=0;i<this.queue.length;i++){
+            if(title===this.queue[i].name){
+                return this.queue[i];
+            }
+        }
+    return null;
+    };
 
     setCurrentSong(currentSong){
 
@@ -100,7 +110,8 @@ function  showQueue(songQueue){
     for(var i=0; i<songQueue.length;i++){
 
         var songItem=document.createElement("div");
-        songItem.innerHTML="<div class='song-item'>" +
+      //  songItem.innerHTML="<div class='song-item'" + " id='"+songQueue[i].name+"'>"
+        songItem.innerHTML="<div id='"+ songQueue[i].name+"' class='song-item' onclick='changeSong(this.id)'>" +
                 "<a> " + songQueue[i].name+ "</a>" +
                 "<a id='totalTime' class='aling-rigth'>"+ songQueue[i].duration + "</a>"+
                 "<br>"+
@@ -112,6 +123,37 @@ function  showQueue(songQueue){
 
 }
 
+
+
+
+function changeSong(title){
+    
+    var song=mPlayer.getSongByTitle(title);
+    putHtmlPlayerBarSong(song);
+    
+    
+    
+   
+    
+}
+
+function putHtmlPlayerBarSong(song){
+    var currentHtmlSong=document.getElementById("player-bar");
+    
+    var htmlNewSong= "<div id='player-bar' >" +
+            "<a class='fontLarge'>"+song.name + "</a>" +
+            "<a class='aling-right'>" +song.duration + "</a>"+
+            "<button> PAUSE </button>" +
+            "<br>" +
+            "<small>" + song.interpreter +"<small></div>";
+    
+     currentHtmlSong.innerHTML=htmlNewSong;
+    
+}
+   
+
+
+
 //ejecución principal.
 var albumT=album;
 var mPlayer=new Player(albumT, albumT.getFirstSong);
@@ -120,3 +162,4 @@ var mPlayer=new Player(albumT, albumT.getFirstSong);
 window.onload = function() {
   showQueue(mPlayer.queue);
 };
+
